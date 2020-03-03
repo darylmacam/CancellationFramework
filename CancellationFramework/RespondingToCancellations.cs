@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace CancellationTkn
 {
-    public class ReactingOnCancellations : ConsoleLogger
+    public class RespondingToCancellations : ConsoleLogger
     {
         public async Task ByPolling()
         {

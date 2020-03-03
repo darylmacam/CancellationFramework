@@ -8,24 +8,19 @@ namespace CancellationTkn
         {
             try
             {
-                // --- Invoking cancellations ---
                 //var job = new InvokingCancellations();
                 //job.ByCancelMethod().Wait();
                 //job.ByTimeoutPeriodInConstructor().Wait();
                 //job.ByTimeoutPeriodUsingCancelAfter().Wait();
 
-                // --- reacting to cancellations ---
-                //var job = new ReactingOnCancellations();
+                //var job = new RespondingToCancellations();
                 //job.ByPolling().Wait();
                 //job.ByRegisteringAction().Wait();
 
-
-                //OperationCancelledExceptions
                 //var job = new OperationCancelledExceptions();
                 //job.Basic().Wait();
                 //job.UseCaseCompleted().Wait();
                 //job.UsingLibrary().Wait();
-
 
                 //var job = new LinkingCancellations();
                 //job.WithoutLinking().Wait() ;
@@ -46,9 +41,8 @@ namespace CancellationTkn
                 //job.Defaults();
                 //job.OptionalParameter();
 
-                var job = new UsingContinueWith();
-                //job.CanceledIsNotFaulted().Wait();
-                job.ThrowOperationCanceledException().Wait();
+                //var job = new TaskContinuation();
+                //job.Execute().Wait();
             }
             catch (Exception ex)
             {
