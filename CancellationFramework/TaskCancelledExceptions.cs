@@ -23,7 +23,7 @@ namespace CancellationTkn
             }
         }
 
-        public async Task ButWithDelayedCancellationIsStillSameException()
+        public async Task UseTaskDelay()
         {
             try
             {
@@ -37,5 +37,22 @@ namespace CancellationTkn
                 Log($"{ex.GetType().FullName} thrown");
             }
         }
+
+
+        public async Task UseHttpClient()
+        {
+            try
+            {
+                var client = new HttpClient();
+                using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(4));
+                await client.GetAsync(@"http://slowwly.robertomurray.co.uk/delay/5000/url/http://www.google.co.uk", cts.Token);
+            }
+            catch (Exception ex)
+            {
+                Log($"{ex.GetType().Name} thrown");
+            }
+        }
     }
+
+
 }

@@ -8,41 +8,34 @@ namespace CancellationTkn
         {
             try
             {
-                //var job = new InvokingCancellations();
-                //job.ByCancelMethod().Wait();
-                //job.ByTimeoutPeriodInConstructor().Wait();
-                //job.ByTimeoutPeriodUsingCancelAfter().Wait();
+                var ic = new InvokingCancellations();
+                ic.UseCancelMethod().Wait();
+                ic.UseCancelAfter().Wait();
+                ic.UseTimeoutPeriod().Wait();
 
-                //var job = new RespondingToCancellations();
-                //job.ByPolling().Wait();
-                //job.ByRegisteringAction().Wait();
+                var rtc = new RespondingToCancellations();
+                rtc.ByPolling().Wait();
+                rtc.ByRegisteringAction().Wait();
 
-                //var job = new OperationCancelledExceptions();
-                //job.Basic().Wait();
-                //job.UseCaseCompleted().Wait();
-                //job.UsingLibrary().Wait();
+                var lc= new LinkingCancellations();
+                lc.WithoutLinking().Wait();
+                lc.WithLinking().Wait();
 
-                //var job = new LinkingCancellations();
-                //job.WithoutLinking().Wait() ;
-                //job.WithLinking().Wait();
+                var oce = new OperationCancelledExceptions();
+                oce.UseCaseCanceled().Wait();
+                oce.UseCaseCompleted().Wait();
 
-                //var job = new OperationCancelledExceptions();
-                //job.Basic().Wait();
-                //job.UseCaseCompleted().Wait();
-                //job.UsingLibrary().Wait();
+                var tce = new TaskCancelledExceptions();
+                tce.WithCancelledToken().Wait();
+                tce.UseTaskDelay().Wait();
+                tce.UseHttpClient().Wait();
 
-                //var job = new TaskVsOperationCancelledException();
-                //job.TryTaskCancelledException().Wait();
-                //job.TryOperationCancelledException().Wait();
+                var ctd = new CancellationTokenDefault();
+                ctd.Defaults();
+                ctd.OptionalParameter();
 
-                //new TopShelfSample().Execute();
-
-                //var job = new CancellationTokenDefault();
-                //job.Defaults();
-                //job.OptionalParameter();
-
-                //var job = new TaskContinuation();
-                //job.Execute().Wait();
+                var tcJob = new TaskContinuation();
+                tcJob.Execute().Wait();
             }
             catch (Exception ex)
             {
