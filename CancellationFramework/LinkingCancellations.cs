@@ -44,20 +44,18 @@ namespace CancellationTkn
         public async Task WithLinkingChildTask(CancellationToken cancellationToken)
         {
             using var myOwnCts = new CancellationTokenSource(TimeSpan.FromSeconds(3));
-            //make sure CancellationTokenRegistration is disposed. Otherwise cancellation of cancellationToken will throw a object disposed exception.
-            using CancellationTokenRegistration tokenRegistration = cancellationToken.Register(myOwnCts.Cancel);
-
-            while (true)
-            {
-                if (cancellationToken.IsCancellationRequested || myOwnCts.Token.IsCancellationRequested)
+            using (var linkedCts = CancellationTokenSource.CreateLinkedTokenSource(myOwnCts.Token, cancellationToken))
+                while (true)
                 {
-                    Log($"Token cancellation requested. Exiting {nameof(WithoutLinkingChildTask)}");
-                    return;
-                }
+                    if (myOwnCts.IsCancellationRequested)
+                    {
+                        Log($"Token cancellation requested. Exiting {nameof(WithoutLinkingChildTask)}");
+                        return;
+                    }
 
-                await Task.Delay(1000);
-                Log($"{nameof(WithLinkingChildTask)} looping");
-            }
+                    await Task.Delay(1000);
+                    Log($"{nameof(WithLinkingChildTask)} looping");
+                }
         }
     }
 }
